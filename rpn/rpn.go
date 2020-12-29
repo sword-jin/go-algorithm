@@ -1,7 +1,6 @@
 package rpn
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 )
@@ -13,21 +12,22 @@ func EvalExpressionString(expression string) int {
 	// 需要两个栈，一个存放操作符，一个存放数字
 	var opStack RuneStack = []rune{'$'}
 	var numStack IntStack = []int{}
+	// 在表达式尾部添加一个站位符号
 	expression += "$"
 
 	for i := 0; i < len(expression); {
-		if expression[i] == ' ' {
+		if expression[i] == ' ' { // 空格处理
 			i++
 			continue
 		}
 		d := rune(expression[i])
 		if runeIsDigit(d) {
-			numStack.Push(readCurNum(expression, &i))
+			numStack.Push(readCurNum(expression, &i)) //把数字读出来
 		} else {
 			for {
 				isBreak := true
 
-				// 对比当前操作符和上操作符的优先级
+				// 对比当前操作符和栈顶操作符的优先级
 				switch compareOp(opStack.Peek(), d) {
 				case '>':
 					topOp := opStack.Pop()
@@ -35,7 +35,6 @@ func EvalExpressionString(expression string) int {
 						numStack.Push(fac(numStack.Pop()))
 					} else {
 						right, left := numStack.Pop(), numStack.Pop()
-						fmt.Println(opstr[topOp], left, right)
 						numStack.Push(calc(topOp, left, right))
 					}
 					isBreak = false
