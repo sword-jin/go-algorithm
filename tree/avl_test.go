@@ -3,18 +3,19 @@ package tree
 import (
 	"testing"
 
+	"github.com/rrylee/go-algorithm/container"
 	"github.com/stretchr/testify/assert"
 )
 
 type IntValue int
 
-func (i IntValue) Compare(v interface{}) CompareRet {
+func (i IntValue) Compare(v interface{}) container.CompareRet {
 	if i == v.(IntValue) {
-		return CompareEqual
+		return container.CompareEqual
 	} else if i < v.(IntValue) {
-		return CompareLt
+		return container.CompareLt
 	} else {
-		return CompareGt
+		return container.CompareGt
 	}
 }
 

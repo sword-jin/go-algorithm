@@ -1,5 +1,7 @@
 package tree
 
+import "github.com/rrylee/go-algorithm/container"
+
 type avltree struct {
 	root Node
 	hot  Node //搜索目标节点的父节点
@@ -18,7 +20,7 @@ func (j avltree) Size() int {
 	return j.size
 }
 
-func (j *avltree) Insert(val Compare) Node {
+func (j *avltree) Insert(val container.Compare) Node {
 	x := j.Search(val)
 	if !nodeIsNil(x) {
 		return x
@@ -30,7 +32,7 @@ func (j *avltree) Insert(val Compare) Node {
 		// 设置插入节点的父节点
 		x.SetParent(j.hot)
 		// 设置父节点的left或者right为插入节点
-		if val.Compare(j.hot.Value()) == CompareGt {
+		if val.Compare(j.hot.Value()) == container.CompareGt {
 			j.hot.SetRightChild(x)
 		} else {
 			j.hot.SetLeftChild(x)
@@ -103,21 +105,22 @@ func rotate(node Node) *TreeNode {
 	}
 }
 
-func (j *avltree) Search(val Compare) Node {
+func (j *avltree) Search(val container.Compare) Node {
+	j.hot = nil
 	if j.root == nil {
 		return nil
 	}
 	return j.SearchIn(j.root, val)
 }
 
-func (j *avltree) SearchIn(node Node, val Compare) Node {
+func (j *avltree) SearchIn(node Node, val container.Compare) Node {
 	if nodeIsNil(node) {
 		return nil
 	}
-	switch node.Value().(Compare).Compare(val) {
-	case CompareEqual:
+	switch node.Value().(container.Compare).Compare(val) {
+	case container.CompareEqual:
 		return node
-	case CompareGt:
+	case container.CompareGt:
 		j.hot = node
 		return j.SearchIn(node.GetLeftChild(), val)
 	default: /* CompareLt */
@@ -126,7 +129,7 @@ func (j *avltree) SearchIn(node Node, val Compare) Node {
 	}
 }
 
-func (j *avltree) Delete(val Compare) Node {
+func (j *avltree) Delete(val container.Compare) Node {
 	x := j.Search(val)
 	if nodeIsNil(x) {
 		return nil

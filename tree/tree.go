@@ -25,20 +25,9 @@ type Node interface {
 }
 
 type AVL interface {
-	Insert(val Compare) Node
-	Search(val Compare) Node
-	Delete(val Compare) Node
+	Insert(val container.Compare) Node
+	Search(val container.Compare) Node
+	Delete(val container.Compare) Node
 	Root() Node
 	Size() int
-}
-
-type CompareRet uint8
-const (
-	CompareEqual CompareRet = iota
-	CompareGt
-	CompareLt
-)
-
-type Compare interface {
-	Compare(interface{}) CompareRet
 }
