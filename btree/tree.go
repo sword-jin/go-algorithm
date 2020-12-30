@@ -5,36 +5,48 @@ import (
 )
 
 type BTree interface {
-	Search(key container.Compare) *Node
-	Insert(key container.Compare)
-	Remove(key container.Compare)
+	Search(key Key) *Node
+	Insert(key Key)
+	Remove(key Key)
+}
+
+type Key int
+
+func (k Key) Compare(i interface{}) container.CompareRet {
+	if i.(Key) == k {
+		return container.CompareEqual
+	} else if i.(Key) < k {
+		return container.CompareGt
+	} else {
+		return container.CompareLt
+	}
 }
 
 type bTree struct {
 	root  *Node
 	hot   *Node
 	size  int
-	order int
+	order int //阶数
 }
 
-func (b *bTree) Search(key container.Compare) *Node {
+func (b *bTree) Search(key Key) *Node {
 	v := b.root
 	b.hot = nil
 	for v != nil {
 		i := v.Keys.Search(key)
-		if i >= 0 {
+		if i >= 0 && v.Keys.Get(i).(Key) == key {
 			return v
 		}
 		b.hot = v
-		v = v.Children.Get(i+1).(*Node)
+		v = v.Children.Get(i + 1).(*Node)
 	}
 	return nil
 }
 
-func (b bTree) Insert(key container.Compare) {
+func (b bTree) Insert(key Key) {
 	panic("implement me")
 }
 
-func (b bTree) Remove(key container.Compare) {
+func (b bTree) Remove(key Key) {
 	panic("implement me")
 }

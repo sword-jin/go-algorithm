@@ -19,7 +19,7 @@ func NewEmptyNode() *Node {
 	}
 }
 
-func NewNodeWithTwoChild(key container.Compare, c1, c2 *Node) *Node {
+func NewNodeWithTwoChild(key container.Item, c1, c2 *Node) *Node {
 	node :=  &Node{
 		Parent:   nil,
 		Keys:     vector.NewVector(2),

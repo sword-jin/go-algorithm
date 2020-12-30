@@ -20,7 +20,7 @@ func (j avltree) Size() int {
 	return j.size
 }
 
-func (j *avltree) Insert(val container.Compare) Node {
+func (j *avltree) Insert(val container.Item) Node {
 	x := j.Search(val)
 	if !nodeIsNil(x) {
 		return x
@@ -105,7 +105,7 @@ func rotate(node Node) *TreeNode {
 	}
 }
 
-func (j *avltree) Search(val container.Compare) Node {
+func (j *avltree) Search(val container.Item) Node {
 	j.hot = nil
 	if j.root == nil {
 		return nil
@@ -113,11 +113,11 @@ func (j *avltree) Search(val container.Compare) Node {
 	return j.SearchIn(j.root, val)
 }
 
-func (j *avltree) SearchIn(node Node, val container.Compare) Node {
+func (j *avltree) SearchIn(node Node, val container.Item) Node {
 	if nodeIsNil(node) {
 		return nil
 	}
-	switch node.Value().(container.Compare).Compare(val) {
+	switch node.Value().(container.Item).Compare(val) {
 	case container.CompareEqual:
 		return node
 	case container.CompareGt:
@@ -129,7 +129,7 @@ func (j *avltree) SearchIn(node Node, val container.Compare) Node {
 	}
 }
 
-func (j *avltree) Delete(val container.Compare) Node {
+func (j *avltree) Delete(val container.Item) Node {
 	x := j.Search(val)
 	if nodeIsNil(x) {
 		return nil

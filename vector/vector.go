@@ -9,7 +9,7 @@ type (
 		Size() int
 		Empty() bool
 		// Search 返回不大于 key 的最后一个值
-		Search(key container.Compare) int
+		Search(key container.Item) int
 		Insert(pos int, v interface{})
 		Delete(pos int)
 		InsertTail(v interface{})
@@ -31,14 +31,14 @@ func (vector vector) Get(i int) interface{} {
 	return vector.list[i]
 }
 
-func (vector vector) Search(key container.Compare) int {
+func (vector vector) Search(key container.Item) int {
 	start, end := 0, len(vector.list)
 	for start < end {
 		mi := (start + end) >> 1
 		if key.Compare(vector.list[mi]) == container.CompareLt {
-			start = mi
+			end = mi + 1 // [mi+1, end]
 		} else {
-			end = mi + 1
+			start = mi // [start, mi)
 		}
 	}
 	return start - 1

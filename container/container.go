@@ -13,6 +13,6 @@ const (
 	CompareLt
 )
 
-type Compare interface {
+type Item interface {
 	Compare(interface{}) CompareRet
 }

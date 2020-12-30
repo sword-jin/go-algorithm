@@ -25,9 +25,9 @@ type Node interface {
 }
 
 type AVL interface {
-	Insert(val container.Compare) Node
-	Search(val container.Compare) Node
-	Delete(val container.Compare) Node
+	Insert(val container.Item) Node
+	Search(val container.Item) Node
+	Delete(val container.Item) Node
 	Root() Node
 	Size() int
 }
