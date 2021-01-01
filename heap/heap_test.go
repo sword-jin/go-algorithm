@@ -1,7 +1,9 @@
 package heap
 
 import (
+	"math/rand"
 	"testing"
+	"time"
 
 	"github.com/rrylee/go-algorithm/container"
 	"github.com/stretchr/testify/assert"
@@ -51,3 +53,21 @@ func TestHeap(t *testing.T) {
 	assert.True(t, ok)
 	assert.Equal(t, v, intVal(13))
 }
+
+func TestCopyFrom(t *testing.T) {
+	rand.Seed(time.Now().UnixNano())
+	var nums = []container.Item{
+		intVal(rand.Int()),
+		intVal(rand.Int()),
+		intVal(rand.Int()),
+		intVal(rand.Int()),
+		intVal(rand.Int()),
+	}
+	heapI := CopyFrom(nums)
+	heap := heapI.(*heap)
+	assert.Less(t, int(heap.list[0].(intVal)), int(heap.list[1].(intVal)))
+	assert.Less(t, int(heap.list[0].(intVal)), int(heap.list[2].(intVal)))
+	assert.Less(t, int(heap.list[1].(intVal)), int(heap.list[3].(intVal)))
+	assert.Less(t, int(heap.list[1].(intVal)), int(heap.list[4].(intVal)))
+}
+
