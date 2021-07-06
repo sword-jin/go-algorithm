@@ -15,7 +15,7 @@ func TestVector(t *testing.T) {
 
 	assert.Equal(t, 4, v.Size())
 
-	v.Delete(0)
+	v.Remove(0)
 	assert.Equal(t, 3, v.Size())
 	assert.Equal(t, v.list, []interface{}{2, 4, 3})
 }

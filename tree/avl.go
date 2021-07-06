@@ -238,4 +238,3 @@ func connect34(a, b, c Node, t1, t2, t3, t4 Node) *TreeNode {
 func nodeIsNil(node Node) bool {
 	return node == nil || node.(*TreeNode) == nil
 }
-

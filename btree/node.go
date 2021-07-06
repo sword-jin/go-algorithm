@@ -12,15 +12,18 @@ type Node struct {
 }
 
 func NewEmptyNode() *Node {
-	return &Node{
+	node := &Node{
 		Parent:   nil,
 		Keys:     vector.NewVector(0),
 		Children: vector.NewVector(0),
 	}
+	var nilNode *Node
+	node.Children.Insert(0, nilNode)
+	return node
 }
 
 func NewNodeWithTwoChild(key container.Item, c1, c2 *Node) *Node {
-	node :=  &Node{
+	node := &Node{
 		Parent:   nil,
 		Keys:     vector.NewVector(2),
 		Children: vector.NewVector(2),
