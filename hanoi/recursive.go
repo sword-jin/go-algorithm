@@ -2,11 +2,13 @@ package hanoi
 
 import "fmt"
 
+type MoveFunc func(from, to string)
+
 var PrintMove = func(from, to string) {
 	fmt.Printf("%s->%s\n", from, to)
 }
 
-func HanoiRecursive(n int, from string, to string, via string, move func(from string, to string)) {
+func HanoiRecursive(n int, from string, to string, via string, move MoveFunc) {
 	if n == 1 {
 		move(from, to)
 	} else {
