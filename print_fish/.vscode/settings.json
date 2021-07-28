@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"*.tcc": "c",
+		"exception": "c",
+		"fstream": "c",
+		"istream": "c",
+		"new": "c",
+		"ostream": "c",
+		"sstream": "c",
+		"stdexcept": "c",
+		"streambuf": "c"
+	}
+}
