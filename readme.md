@@ -24,4 +24,5 @@
 - 并发问题
   - print fish <>< ><>
   - 哲学家吃饭问题
+  - print n valid bracket
 - 最简单的模拟器 (memu)

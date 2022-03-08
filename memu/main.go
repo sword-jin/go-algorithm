@@ -36,6 +36,7 @@ var M = [NMEM]uint8{
 	0b00100001, // y = 33
 	0b00000000, // z = 0
 }
+
 func getRTAndRS(instruction uint8) (rt, rs uint8) {
 	rt = (instruction >> 2) & 0b000000011
 	rs = instruction & 0b00000011
